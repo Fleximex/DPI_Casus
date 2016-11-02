@@ -6,6 +6,8 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -21,6 +23,7 @@ public class GameUI extends javax.swing.JFrame
     {
         initComponents();
         this.getContentPane().setBackground(new Color(180, 185, 210));
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
