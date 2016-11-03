@@ -5,6 +5,8 @@
  */
 package gui;
 
+import game.Game;
+import game.ResourceAmount;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -22,9 +24,10 @@ public class GameUI extends javax.swing.JFrame
     public GameUI()
     {
         initComponents();
-        this.getContentPane().setBackground(new Color(180, 185, 210));
+        this.getContentPane().setBackground(new Color(180, 185, 205));
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        Game game = new Game(10, 10, ResourceAmount.MEDIUM);
     }
 
     /**

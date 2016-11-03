@@ -19,4 +19,14 @@ public class GridTile
         this.position = position;
         this.gridTileType = gridTileType;
     }
+
+    public Position getPosition() 
+    {
+        return position;
+    }
+
+    public GridTileType getGridTileType()
+    {
+        return gridTileType;
+    }
 }

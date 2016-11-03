@@ -23,6 +23,7 @@ public class Game
     {
         this.width = width;
         this.height = height;
+        this.resourceAmount = resourceAmount;
         
         init();
     }
@@ -30,6 +31,10 @@ public class Game
     private void init()
     {
         generateGrid();
+        for (GridTile gridTile : gridTiles)
+        {
+            System.out.println("GridTile: pos=" + gridTile.getPosition().getxPos() + "." + gridTile.getPosition().getyPos() + " & type=" + gridTile.getGridTileType());
+        }
     }
     
     private void generateGrid()
