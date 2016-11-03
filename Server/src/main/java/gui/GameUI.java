@@ -7,9 +7,14 @@ package gui;
 
 import game.Game;
 import game.ResourceAmount;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,17 +22,51 @@ import java.awt.Toolkit;
  */
 public class GameUI extends javax.swing.JFrame
 {
-
-    /**
-     * Creates new form main
-     */
+    private JPanel buttonPanel;
+    private Game game;
+    
     public GameUI()
     {
-        initComponents();
-        this.getContentPane().setBackground(new Color(180, 185, 205));
+        
+        game = new Game(10, 10, ResourceAmount.MEDIUM);
+        URL location = GameUI.class.getProtectionDomain().getCodeSource().getLocation();
+        System.out.println(location.getFile());
+        init();
+    }
+    
+    private void init()
+    {
+        this.setSize(800, 800);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);        
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(10, 10));
+        gridLayout(10, 10);
+        //this.pack();
+        this.setLayout(new BorderLayout());
+        this.add(buttonPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        Game game = new Game(10, 10, ResourceAmount.MEDIUM);
+        ImageIcon imageIconBeta =  new ImageIcon(this.getClass().getResource("/doge.png")); 
+        for (Component button : buttonPanel.getComponents())
+        {
+            Image img = imageIconBeta.getImage();
+            img.getScaledInstance(((JButton) button).getWidth(), ((JButton) button).getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(img);
+            ((JButton) button).setIcon(imageIcon);
+        }
+    }
+    
+    private void gridLayout(int x, int y)
+    {
+        JButton button;
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < y; j++)
+            {
+                button = new JButton();
+                buttonPanel.add(button);
+            }
+        }
     }
 
     /**

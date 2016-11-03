@@ -27,6 +27,11 @@ public class Game
         
         init();
     }
+
+    public ArrayList<GridTile> getGridTiles()
+    {
+        return gridTiles;
+    }
     
     private void init()
     {
