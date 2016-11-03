@@ -9,15 +9,14 @@ package game;
  *
  * @author Maarten
  */
-public class GridTile
+public abstract class Unit 
 {
-    private final Position position;
-    private final GridTileType gridTileType;
+    private UnitType unitType;
+    private Position position;
 
-    public GridTile(Position position, GridTileType gridTileType)
+    public UnitType getUnitType()
     {
-        this.position = position;
-        this.gridTileType = gridTileType;
+        return unitType;
     }
 
     public Position getPosition()
@@ -25,8 +24,8 @@ public class GridTile
         return position;
     }
 
-    public GridTileType getGridTileType()
+    public void setPosition(Position position)
     {
-        return gridTileType;
+        this.position = position;
     }
 }

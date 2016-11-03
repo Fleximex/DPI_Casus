@@ -11,8 +11,8 @@ package game;
  */
 public class Position
 {
-    private final int xPos; //first member of pair
-    private final int yPos; //second member of pair
+    private final int xPos;
+    private final int yPos;
 
     public Position(int xPos, int yPos)
     {
