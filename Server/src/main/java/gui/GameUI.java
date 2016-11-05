@@ -11,10 +11,13 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -23,12 +26,13 @@ import javax.swing.JPanel;
 public class GameUI extends javax.swing.JFrame
 {
     private JPanel buttonPanel;
-    private Game game;
+    private JPanel loadingPanel;
+    private final Game game;
+    private int loadingPercentage = 0;
     
     public GameUI()
     {
-        
-        game = new Game(10, 10, ResourceAmount.MEDIUM);
+        game = new Game(8, 8, ResourceAmount.MEDIUM);
         URL location = GameUI.class.getProtectionDomain().getCodeSource().getLocation();
         System.out.println(location.getFile());
         init();
@@ -39,21 +43,35 @@ public class GameUI extends javax.swing.JFrame
         this.setSize(800, 800);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);        
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(10, 10));
-        gridLayout(10, 10);
-        //this.pack();
+        loadingPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(8, 8));
+        gridLayout(8, 8);
+        this.setResizable(false);
         this.setLayout(new BorderLayout());
         this.add(buttonPanel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        ImageIcon imageIconBeta =  new ImageIcon(this.getClass().getResource("/doge.png")); 
-        for (Component button : buttonPanel.getComponents())
+        buttonPanel.setVisible(false);
+        JLabel loadingLabel = new JLabel("Loading: " + loadingPercentage + "%", new ImageIcon(this.getClass().getResource("/ajax-loader.gif")), SwingConstants.CENTER);
+        loadingPanel.add(loadingLabel);
+        this.add(loadingPanel, BorderLayout.CENTER);
+        ImageIcon imageIconBeta = new ImageIcon(this.getClass().getResource("/doge.png")); 
+        int length = buttonPanel.getComponents().length;
+        for (int i = 0; i < length; i++)
         {
+            Component button = buttonPanel.getComponents()[i];
             Image img = imageIconBeta.getImage();
-            img.getScaledInstance(((JButton) button).getWidth(), ((JButton) button).getHeight(), Image.SCALE_SMOOTH);
+            img = img.getScaledInstance(((JButton) button).getWidth(), ((JButton) button).getHeight(), Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(img);
             ((JButton) button).setIcon(imageIcon);
+            loadingPercentage = (int)Math.floor(((double)i/length)*100);
+            System.out.println(loadingPercentage);
+            ((JLabel)loadingPanel.getComponent(0)).setText("Loading: " + loadingPercentage + "%");
+            loadingPanel.repaint();
         }
+        buttonPanel.setVisible(true);
+        this.remove(loadingPanel);
+        this.repaint();
     }
     
     private void gridLayout(int x, int y)
