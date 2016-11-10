@@ -6,6 +6,7 @@
 package main;
 
 import gui.GameUI;
+import gui.GameUI;
 
 /**
  *

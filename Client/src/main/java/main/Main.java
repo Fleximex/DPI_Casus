@@ -3,10 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package game;
+package main;
+
+import gui.LobbyUI;
 
 /**
  *
  * @author Maarten
  */
-public enum ResourceAmount { LOW, MEDIUM, HIGH, INSANE }
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LobbyUI lobbyUI = new LobbyUI();
+    }   
+}
